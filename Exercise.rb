@@ -96,7 +96,7 @@ user_data = {name: "神里", age: 31, address: "埼玉"}
 update_data = {age: 32, address: "沖縄"}
 user_data.update(update_data)
 
-# Q20  添削待ち
+# Q20  添削済み
 users = [
   {name: "satou", age: 22},
   {name: "yamada", age: 12},
@@ -107,11 +107,11 @@ users.each do |user|
     puts "私の名前は#{user[:name]}です年齢は#{user[:age]}です"
 end
 
-# Q21　添削待ち
+# Q21　添削済み
 user = {name: "satou", age: 33, address: "saitama", hobby: "soccer", email: "hoge@fuga.com"}
 user.keys
 
-# Q22　添削待ち
+# Q22　添削済み
 users = [
   {name: "satou", age: 33, address: "saitama", hobby: "soccer", email: "hoge@fuga.com"},
   {},
@@ -127,10 +127,10 @@ users.each.with_index(1) do |user,i|
   end
 end
 
-# Q23　添削待ち
+# Q23　添削済み
 hash = {name: "satou", age: 33, address: "saitama", hobby: "soccer", email: "hoge@fuga.com"}
 arr = hash.flatten
-# Q24　添削待ち
+# Q24　添削済み
 users = [
   { name: "saitou", hobby: "soccer", age: 33, role: "admin" },
   { name: "yamada", hobby: "baseball", role: "normal" }
@@ -139,7 +139,7 @@ users.each do |user|
   puts user.has_key?(:age)? "OK" : "NG"
 end
 
-# Q25　添削待ち
+# Q25　添削済み
 keys = [:age, :name, :hobby, :address]
 user = { name: "saitou", hobby: "soccer", age: 33, role: "admin" }
 keys.each do |key|
@@ -149,18 +149,18 @@ keys.each do |key|
     puts "userには#{key}というキーがありません"
   end
 end
-# Q26　添削待ち
+# Q26　添削済み
 hash = {C: "printf", COBOL: "DISPLAY", Go: "fmt.Print", Java: "System.out.println"}
 hash_2 = {JavaScript: "console.log", R: "print", Ruby: "puts"}
 new_hash = hash.merge(hash_2)
 
-# Q27　#28 nameのところだけ全ての情報が出てきてしましいます。
+# Q27　#28 修正済み。ありがとうございました。
 class User
-  def initialize(name:,age:,gender:,admin:)
-    @name     = name,
-    @age      = age,
-    @gender   = gender,
-    @admin    = admin
+  def initialize(params)
+    @name     = params[:name]
+    @age      = params[:age]
+    @gender   = params[:gender]
+    @admin    = params[:admin]
   end
 
   def info
@@ -177,3 +177,122 @@ user2 = User.new(name: "あじー", age: 32, gender: "男", admin: false)
 user1.info
 puts "-----------"
 user2.info
+
+# Q29　添削待ち
+class User
+  def initialize(name:)
+    @name = name
+  end
+
+  def name=(name)
+    @name = name
+  end
+
+  def name
+    @name
+  end
+end
+user = User.new(name: "あじー")
+puts user.name
+user.name = "tanakin"
+puts user.name
+
+# Q30　添削待ち
+class User
+  def initialize(params)
+    @name = params[:name]
+    @age  = params[:age]
+  end
+
+  def introduce
+    if @age > 20
+      puts "こんにちは、#{@name}と申します、よろしくお願いいたします"
+    else
+      puts "はいさいまいど〜、#{@name}です！！！"
+    end
+  end
+end
+user = User.new(name: "あじー", age: 32)
+puts user.introduce
+user2 = User.new(name: "ゆたぼん", age: 10)
+puts user2.introduce
+
+# Q31　添削待ち
+class Item
+  attr_accessor :name
+  def initialize(name)
+    @name = name
+  end
+end
+book = Item.new("ゼロ秒思考")
+puts book.name
+
+# Q32　パスです。こんがらがってきました。また考えます。
+class User
+  attr_accessor :name, :age
+  def initialize(params)
+    @name = params[:name]
+    @age  = params[:age]
+  end
+end
+
+class Zoo
+  attr_accessor :name, :fee
+  def initialize(params)
+    @name = params[:name]
+    @fee  = pramas[:fee]
+  end
+
+  tod = [name: "幼児", fee:0]
+  child = [name: "子供", fee:0]
+  adult = [name: "成人", fee:0]
+  senior = [name: "シニア", fee:0]
+
+  def check_entry_fee
+
+
+
+# Q33　添削待ち
+hash_1 = {name: "あじー", age: 32, address: "札幌", tell: "090-000-000"}
+hash_2 = {name: "あじー", age: 32, address: "札幌"}
+
+def has_all_keys?(hash)
+  all_keys = [:name, :age, :address, :tell]
+  hash.keys == all_keys
+end
+
+has_all_keys?(hash_1)
+has_all_keys?(hash_2)
+
+# Q34　添削待ち
+programming_language = ["ruby", "php", "python", "javascript"]
+programming_language.map &:capitalize
+programming_language.map &:upcase
+
+# Q35　添削待ち
+value = [["田中", "JavaScript"], 30]
+value.flatten!
+key = ["user_name","learning_contents","learning_time"]
+arr = [key,value].transpose
+h = Hash[*arr.flatten]
+
+# Q36 添削待ち
+value = {["田中", "JavaScript"]=>30}
+new_value = value.flatten.flatten!
+new_value.to_a
+key = ["user_name","learning_contents","learning_time"]
+arr = [key,new_value].transpose
+h = Hash[*arr.flatten]
+
+# Q37 添削待ち
+value = {["田中", "HTML"]=>30, ["斎藤", "JavaScript"]=>50}
+new_value = value.flatten.flatten!
+new_value.to_a
+value_1 = new_value[0..2]
+value_2 = new_value[3..5]
+key = ["user_name","learning_contents","learning_time"]
+arr_1 = [key,value_1].transpose
+arr_2 = [key,value_2].transpose
+h_1 = Hash[*arr_1.flatten]
+h_2 = Hash[*arr_2.flatten]
+array = h_1,h_2
