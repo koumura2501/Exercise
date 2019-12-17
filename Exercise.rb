@@ -227,7 +227,7 @@ end
 book = Item.new("ゼロ秒思考")
 puts book.name
 
-# Q32　パスです。こんがらがってきました。また考えます。
+# Q32　添削待ち
 class User
   attr_accessor :name, :age
   def initialize(params)
@@ -237,21 +237,35 @@ class User
 end
 
 class Zoo
-  attr_accessor :name, :fee
+  attr_accessor :name, :fee1 ,:fee2 , :fee3, :fee4
   def initialize(params)
-    @name = params[:name]
-    @fee  = pramas[:fee]
+    @name   = params[:name]
+    @baby_fee = params[:fee1]
+    @child_fee  = params[:fee2]
+    @adult_fee  = params[:fee3]
+    @senior_fee = params[:fee4]
   end
 
-  tod = [name: "幼児", fee:0]
-  child = [name: "子供", fee:0]
-  adult = [name: "成人", fee:0]
-  senior = [name: "シニア", fee:0]
+  def check_entry_fee(user)
+    if user.age < 6
+      puts "幼児料金で#{@baby_fee}円です"
+    elsif user.age < 13
+      puts "子供料金で#{@child_fee}円です"
+    elsif user.age < 65
+      puts "成人料金で#{@adult_fee}円です"
+    elsif user.age < 120
+      puts "シニア料金で#{@senior_fee}円です"
+    else
+      puts "無効な値です"
+    end
+  end
+end
 
-  def check_entry_fee
-
-
-
+user1 = User.new(name:"タチコマ",age:3)
+user2 = User.new(name:"トグサ",age:30)
+zoo = Zoo.new(name:"徳山zoo", fee1:0, fee2:500, fee3:1000, fee4:700)
+zoo.check_entry_fee(user1)
+zoo.check_entry_fee(user2)
 # Q33　添削待ち
 hash_1 = {name: "あじー", age: 32, address: "札幌", tell: "090-000-000"}
 hash_2 = {name: "あじー", age: 32, address: "札幌"}
