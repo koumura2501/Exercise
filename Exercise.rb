@@ -178,7 +178,7 @@ user1.info
 puts "-----------"
 user2.info
 
-# Q29　添削待ち
+# Q29　添削済み
 class User
   def initialize(name:)
     @name = name
@@ -197,9 +197,9 @@ puts user.name
 user.name = "tanakin"
 puts user.name
 
-# Q30　添削待ち
+# Q30　添削済み
 class User
-  def initialize(params)
+  def initialize(**params)
     @name = params[:name]
     @age  = params[:age]
   end
@@ -217,7 +217,7 @@ puts user.introduce
 user2 = User.new(name: "ゆたぼん", age: 10)
 puts user2.introduce
 
-# Q31　添削待ち
+# Q31　添削済み
 class Item
   attr_accessor :name
   def initialize(name)
@@ -227,9 +227,9 @@ end
 book = Item.new("ゼロ秒思考")
 puts book.name
 
-# Q32　添削待ち
+# Q32　以下修正済み↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 class User
-  attr_accessor :name, :age
+  attr_reader :age
   def initialize(params)
     @name = params[:name]
     @age  = params[:age]
@@ -237,7 +237,6 @@ class User
 end
 
 class Zoo
-  attr_accessor :name, :fee1 ,:fee2 , :fee3, :fee4
   def initialize(params)
     @name   = params[:name]
     @baby_fee = params[:fee1]
@@ -247,13 +246,14 @@ class Zoo
   end
 
   def check_entry_fee(user)
-    if user.age < 6
+    case user.age
+    when 1..5
       puts "幼児料金で#{@baby_fee}円です"
-    elsif user.age < 13
+    when 6..12
       puts "子供料金で#{@child_fee}円です"
-    elsif user.age < 65
+    when 13..64
       puts "成人料金で#{@adult_fee}円です"
-    elsif user.age < 120
+    when 65..120
       puts "シニア料金で#{@senior_fee}円です"
     else
       puts "無効な値です"
@@ -266,47 +266,42 @@ user2 = User.new(name:"トグサ",age:30)
 zoo = Zoo.new(name:"徳山zoo", fee1:0, fee2:500, fee3:1000, fee4:700)
 zoo.check_entry_fee(user1)
 zoo.check_entry_fee(user2)
-# Q33　添削待ち
+# Q33　修正済み
+# 順番が変わるとfalseになってしまう事確認しました。
+# 勉強になりました。
 hash_1 = {name: "あじー", age: 32, address: "札幌", tell: "090-000-000"}
 hash_2 = {name: "あじー", age: 32, address: "札幌"}
 
 def has_all_keys?(hash)
-  all_keys = [:name, :age, :address, :tell]
-  hash.keys == all_keys
+  all_keys = [:name, :age, :address, :tell].sort
+  hash.keys.sort == all_keys
 end
 
 has_all_keys?(hash_1)
 has_all_keys?(hash_2)
 
-# Q34　添削待ち
-programming_language = ["ruby", "php", "python", "javascript"]
-programming_language.map &:capitalize
-programming_language.map &:upcase
+# Q34　修正済み
+languages = ["ruby", "php", "python", "javascript"]
+programming_language = languages.map &:capitalize
+upper_case_programming_language = languages.map &:upcase
+p programming_language
+p upper_case_programming_language
 
-# Q35　添削待ち
+# Q35　修正済み　驚くほどすっきりして可読性が上がったように思います。ありがとうございました。
 value = [["田中", "JavaScript"], 30]
 value.flatten!
 key = ["user_name","learning_contents","learning_time"]
-arr = [key,value].transpose
-h = Hash[*arr.flatten]
+[key,value].transpose.to_h
 
-# Q36 添削待ち
+# Q36 修正済み
 value = {["田中", "JavaScript"]=>30}
-new_value = value.flatten.flatten!
-new_value.to_a
+new_value = value.to_a.flatten
 key = ["user_name","learning_contents","learning_time"]
-arr = [key,new_value].transpose
-h = Hash[*arr.flatten]
+[key,new_value].transpose.to_h
 
-# Q37 添削待ち
-value = {["田中", "HTML"]=>30, ["斎藤", "JavaScript"]=>50}
-new_value = value.flatten.flatten!
-new_value.to_a
-value_1 = new_value[0..2]
-value_2 = new_value[3..5]
+# Q37
+# ハッシュの中身をマップで一つ一つQ36の形にして処理するイメージなのですが、色々やるもうまくいきません。
+value = {["田中", "HTML"]=>30, ["斎藤", "JavaScript"]=>50}.to_a
 key = ["user_name","learning_contents","learning_time"]
-arr_1 = [key,value_1].transpose
-arr_2 = [key,value_2].transpose
-h_1 = Hash[*arr_1.flatten]
-h_2 = Hash[*arr_2.flatten]
-array = h_1,h_2
+#[["田中", "HTML"], 30], [["斎藤", "JavaScript"], 50]]
+hash =[key,value].map {|k,v|[k,v].transpose.to_h}
