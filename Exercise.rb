@@ -299,9 +299,8 @@ new_value = value.to_a.flatten
 key = ["user_name","learning_contents","learning_time"]
 [key,new_value].transpose.to_h
 
-# Q37
-# ハッシュの中身をマップで一つ一つQ36の形にして処理するイメージなのですが、色々やるもうまくいきません。
-value = {["田中", "HTML"]=>30, ["斎藤", "JavaScript"]=>50}.to_a
-key = ["user_name","learning_contents","learning_time"]
-#[["田中", "HTML"], 30], [["斎藤", "JavaScript"], 50]]
-hash =[key,value].map {|k,v|[k,v].transpose.to_h}
+# Q37 修正済み。
+# 多分これでしょうか。あの長々したコードがわずか３行・・・美しい・・・
+values = {["田中", "HTML"]=>30, ["斎藤", "JavaScript"]=>50}
+keys = ["user_name","learning_contents","learning_time"]
+arrys = values.map{|v| [keys,v.to_a.flatten].transpose.to_h}
